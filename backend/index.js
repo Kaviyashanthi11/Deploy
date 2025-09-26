@@ -22,7 +22,7 @@ const upload = multer({ storage });
 // Store processed data temporarily
 const processedFiles = new Map();
 
-// VPN Connectivity Check Function
+// VPN Connectivity Check Function  
 import https from 'https';
 import fetch from 'node-fetch';
 async function continueWithLoggedInSession(page) {
@@ -2512,7 +2512,7 @@ if (Array.isArray(popupMessages)) {
                     filename: "updated_file.xlsx"
                 });
                 
-                console.log("✅ Excel file generated successfully");
+                console.log("✅ Excel file generated successfully");    
             } else {
                 console.log("⚠️ No data available for Excel generation");
             }
@@ -2521,17 +2521,15 @@ if (Array.isArray(popupMessages)) {
             excelError = error.message;
         }
         
-        // Clean up browser
-        if (newPage) {
-            try {
-                await new Promise(resolve => setTimeout(resolve, 2000));
-                await newPage.close();
-                console.log("Browser closed");
-            } catch (closeError) {
-                console.error("Error closing browser:", closeError);
-            }
-        }
-        
+       if (browser) {
+  try {
+    await browser.close();   // this definitely returns a Promise
+    console.log("Browser closed");
+  } catch (closeError) {
+    console.error("Error closing browser:", closeError);
+  }
+}
+
         // Send response
        // Send response
 const successfulCount = (results.successful || []).length;
@@ -2580,6 +2578,11 @@ if (processingError === "Diagnoses not found in Excel.") {
     });
 }
     }
+});
+
+// Root route (for testing deployment)
+app.get("/", (req, res) => {
+    res.send("🚀 Backend is running on Render!");
 });
 
 // Keep your existing download endpoint unchanged
