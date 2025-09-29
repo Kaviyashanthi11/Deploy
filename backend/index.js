@@ -9,7 +9,7 @@ import path from 'path';
 import { Readable } from 'stream';
 
 const app = express();
-const port = 5000;
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -2620,4 +2620,6 @@ app.get("/download/:fileId", (req, res) => {
     }, 3 * 60 * 60 * 1000); // Remove after 3 hours
 });
 
-app.listen(port, () => console.log(`Server running on http://localhost:${port}`));
+app.listen(port, () => {
+    console.log(`🚀 Server running on port ${port}`);
+});
