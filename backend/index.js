@@ -7,11 +7,16 @@ import puppeteer from 'puppeteer';
 import fs from 'fs';
 import path from 'path';
 import { Readable } from 'stream';
-
+const allowedOrigins = [
+  "https://deploy-git-main-kaviyashanthi11s-projects.vercel.app" // your frontend
+];
 const app = express();
 const port = process.env.PORT || 5000;
-
-app.use(cors());
+app.use(cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST"],
+  allowedHeaders: ["Content-Type"]
+}));
 app.use(express.json());
 
 const storage = multer.memoryStorage();
@@ -2285,20 +2290,20 @@ app.post("/process", upload.single("file"), async (req, res) => {
             processingError = null;
         } else {
            
-        // Launch Puppeteer (browser is only launched if VPN is connected)
-        browser = await puppeteer.launch({
-            headless: false,
-            args: ["--ignore-certificate-errors",
-                '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--disable-dev-shm-usage',
-                '--reduce-security-for-testing'
-            ],
-            defaultViewport: null
-        });
-        const page = await browser.newPage();
-        await continueWithLoggedInSession(page);
-            
+      browser = await puppeteer.launch({
+    headless: true, // must be true for Render
+    args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+        "--ignore-certificate-errors"
+    ],
+    defaultViewport: null
+});
+
+const page = await browser.newPage();
+await continueWithLoggedInSession(page);
+
             for (let i = 1; i < originalData.length; i++) {
                 const row = originalData[i];
                 if (!row) continue;
