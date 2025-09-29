@@ -3,7 +3,7 @@ import { Button, Backdrop, CircularProgress } from "@mui/material";
 import { useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-const Whittier = () => {
+const File = () => {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
   const fileInputRef = useRef(null);
@@ -123,4 +123,4 @@ const Whittier = () => {
   );
 };
 
-export default Whittier;
+export default File;
