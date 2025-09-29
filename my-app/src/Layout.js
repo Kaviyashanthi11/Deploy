@@ -17,7 +17,6 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import FileUpload from "./File";
 import Avatar from "@mui/material/Avatar";
-import Whittier from "./Whittier";
 
 const drawerWidth = 230;
 
@@ -212,7 +211,6 @@ const Layout = (props) => {
   }}
 >
   {selectedMenu === "fileUpload" && <FileUpload />}
-  {selectedMenu === "whittier" && <Whittier />}
 </Box>
     </Box>
   );
