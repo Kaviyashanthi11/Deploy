@@ -2137,7 +2137,7 @@ app.post("/process", upload.single("file"), async (req, res) => {
     if (!req.file || !req.body.originalPath) {
         return res.status(400).json({ error: "No file or original path provided" });
     }
-    let browser;
+    let browser;  
     let newPage = null;
     let originalData = [];
     let headers = [];

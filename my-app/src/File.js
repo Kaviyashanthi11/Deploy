@@ -40,7 +40,7 @@ const Whittier = () => {
     formData.append("originalPath", file.name);
 
     try {
-      const processResponse = await fetch("http://localhost:5000/process", {
+      const processResponse = await fetch("https://deploy-agz9.onrender.com/process", {
         method: "POST",
         body: formData,
       });
