@@ -2290,8 +2290,8 @@ app.post("/process", upload.single("file"), async (req, res) => {
             processingError = null;
         } else {
            
-      browser = await puppeteer.launch({
-    headless: true, // must be true for Render
+   const browser = await puppeteer.launch({
+    headless: true, // MUST be true on Render
     args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
@@ -2301,9 +2301,9 @@ app.post("/process", upload.single("file"), async (req, res) => {
     defaultViewport: null
 });
 
-const page = await browser.newPage();
-await continueWithLoggedInSession(page);
-
+        const page = await browser.newPage();
+        await continueWithLoggedInSession(page);
+            
             for (let i = 1; i < originalData.length; i++) {
                 const row = originalData[i];
                 if (!row) continue;
